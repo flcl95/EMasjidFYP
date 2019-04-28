@@ -1,4 +1,5 @@
 package com.fyp.emasjid;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,9 @@ public class AdzanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adzan);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("Prayer Time");
 
         subh = findViewById(R.id.textSubh);
         zuhr = findViewById(R.id.textZuhr);

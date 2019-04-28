@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -19,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 public class QuranActivity extends AppCompatActivity implements MediaPlayer.OnBufferingUpdateListener,MediaPlayer.OnCompletionListener{
 
-    private TextView testView;
     private ImageButton btn_play_pause;
     private SeekBar seekBar;
 
@@ -34,6 +35,9 @@ public class QuranActivity extends AppCompatActivity implements MediaPlayer.OnBu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quran);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("Al-Quran Stream");
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnBufferingUpdateListener(this);
@@ -52,8 +56,6 @@ public class QuranActivity extends AppCompatActivity implements MediaPlayer.OnBu
                 return false;
             }
         });
-
-        testView = (TextView)findViewById(R.id.textTimer);
 
         btn_play_pause = (ImageButton) findViewById(R.id.btn_play_pause);
 
@@ -87,7 +89,7 @@ public class QuranActivity extends AppCompatActivity implements MediaPlayer.OnBu
                 realTimeLength = mediaFileLength;
                 updateSeekBar();
                 mediaPlayer.start();
-                btn_play_pause.setImageResource(R.drawable.ic_pause_black_24dp);
+                //btn_play_pause.setImageResource(R.drawable.ic_pause_black_24dp);
 
             }
         });
@@ -151,9 +153,6 @@ public class QuranActivity extends AppCompatActivity implements MediaPlayer.OnBu
                 public void run() {
                     updateSeekBar();
                     realTimeLength-=1000; // declare 1 second
-                    testView.setText(String.format("%d:%d", TimeUnit.MILLISECONDS.toMinutes(realTimeLength),
-                            TimeUnit.MILLISECONDS.toSeconds(realTimeLength) -
-                                    TimeUnit.MILLISECONDS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(realTimeLength))));
 
                 }
 

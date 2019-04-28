@@ -5,6 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -24,6 +26,9 @@ public class QiblaActivity extends AppCompatActivity implements SensorEventListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qibla);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("Qibla");
 
         compass = (ImageView) findViewById(R.id.iv_arrow);
         sensorService = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
