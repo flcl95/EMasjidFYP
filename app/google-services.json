@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "135723977961",
+    "firebase_url": "https://e-masjid-2a67c.firebaseio.com",
+    "project_id": "e-masjid-2a67c",
+    "storage_bucket": "e-masjid-2a67c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135723977961:android:9be3e51ad775a33c",
+        "android_client_info": {
+          "package_name": "com.fyp.emasjid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135723977961-v4ck48eebgh5jaeotmchqvltdq3tkf8p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fyp.emasjid",
+            "certificate_hash": "83f25057f6fbe9c610076579c7fb67c8304619b6"
+          }
+        },
+        {
+          "client_id": "135723977961-t17fe87201luhermrpfm5dh796umm503.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ-RqNL4LY4IPxIycz56XwbSaM8tYJ5GI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135723977961-t17fe87201luhermrpfm5dh796umm503.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
