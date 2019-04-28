@@ -1,10 +1,14 @@
 package com.fyp.emasjid;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.provider.CalendarContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -26,6 +30,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nineoldandroids.view.ViewHelper;
 import com.squareup.picasso.Picasso;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 public class EventDetailActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
 
@@ -33,7 +41,7 @@ public class EventDetailActivity extends AppCompatActivity implements Observable
     private View mToolbarView;
     private ObservableScrollView mScrollView;
     private int mParallaxImageHeight;
-    private String eventId;
+    private String eventId,eventTitle, eventLocation, eventdate;
     private ImageView ed_image;
     private TextView ed_title, ed_location, ed_date, ed_description, ed_gender, ed_age, ed_organizer, ed_contact, ed_participantLimit;
     private DatabaseReference eventRef;
@@ -137,7 +145,14 @@ public class EventDetailActivity extends AppCompatActivity implements Observable
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(EventDetailActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(Intent.ACTION_EDIT);
+                        intent.setType("vnd.android.cursor.item/event");
+                        intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+                        intent.putExtra(CalendarContract.Events.TITLE, eventTitle);
+                        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, eventLocation);
+                        startActivity(intent);
+                        //Toast.makeText(EventDetailActivity.this,"You Clicked : " + eventdate, Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });
@@ -152,13 +167,20 @@ public class EventDetailActivity extends AppCompatActivity implements Observable
     private void retrieveEventDetails() {
 
         eventRef.child(eventId).addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                //eventdate = dataSnapshot.child("date").getValue().toString();
+                //LocalDate date = Instant.ofEpochMilli(Long.parseLong(eventdate))
+                //        .atOffset(ZoneOffset.of("+08:00"))
+                //        .toLocalDate();
+
                 String eventImage = dataSnapshot.child("image").getValue().toString();
-                String eventTitle = dataSnapshot.child("title").getValue().toString();
-                String eventLocation = dataSnapshot.child("location").getValue().toString();
+                eventTitle = dataSnapshot.child("title").getValue().toString();
+                eventLocation = dataSnapshot.child("location").getValue().toString();
                 String eventDate = dataSnapshot.child("date").getValue().toString();
+                //String eventDate = date.toString();
                 String eventDesc = dataSnapshot.child("detail").getValue().toString();
                 String eventGender = dataSnapshot.child("gender").getValue().toString();
                 String eventLimit = dataSnapshot.child("limit").getValue().toString();

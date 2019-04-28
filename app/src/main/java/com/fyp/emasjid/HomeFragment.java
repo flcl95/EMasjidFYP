@@ -92,7 +92,6 @@ public class HomeFragment extends Fragment {
                         String eventId = getRef(position).getKey();
                         Intent eventDetailIntent = new Intent(getActivity(), EventDetailActivity.class);
                         eventDetailIntent.putExtra("eventId", eventId);
-                        Toast.makeText(getContext(),"You Clicked : " + eventId, Toast.LENGTH_SHORT).show();
                         startActivity(eventDetailIntent);
                     }
                 });
@@ -136,7 +135,6 @@ public class HomeFragment extends Fragment {
                                 public void onClick(View v) {
 
                                     String eventId = getRef(position).getKey();
-
                                     Intent eventDetailIntent = new Intent(getActivity(), EventDetailActivity.class);
                                     eventDetailIntent.putExtra("eventId", eventId);
                                     startActivity(eventDetailIntent);
