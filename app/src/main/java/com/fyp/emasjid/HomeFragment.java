@@ -18,14 +18,18 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView1,mRecyclerView2;
-    private DatabaseReference mRef,fRef;
+    private DatabaseReference mRef,fRef,ref;
     private View view;
 
 
@@ -40,6 +44,8 @@ public class HomeFragment extends Fragment {
         //set layout as LinearLayout
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManager1.setReverseLayout(true);
+        layoutManager1.setStackFromEnd(true);
         mRecyclerView1.setLayoutManager(layoutManager1);
         mRecyclerView2.setLayoutManager(layoutManager2);
         //snap horizontal scroll
@@ -50,6 +56,7 @@ public class HomeFragment extends Fragment {
         //send Query to FirebaseDB
         mRef = FirebaseDatabase.getInstance().getReference().child("Event");
         fRef = FirebaseDatabase.getInstance().getReference().child("Favorite");
+        ref = FirebaseDatabase.getInstance().getReference();
 
         return view;
     }
@@ -57,7 +64,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Query sortedQuery = mRef.orderByChild("title");
+        Query sortedQuery = mRef.orderByChild("registered");
         FirebaseRecyclerOptions<Event> options1 =
                 new FirebaseRecyclerOptions.Builder<Event>()
                         .setQuery(sortedQuery, Event.class)
@@ -110,27 +117,41 @@ public class HomeFragment extends Fragment {
 
         FirebaseRecyclerAdapter<Event,EventFragment.EventViewHolder> adapter2 = new FirebaseRecyclerAdapter<Event, EventFragment.EventViewHolder>(options2) {
             @Override
-            protected void onBindViewHolder(@NonNull EventFragment.EventViewHolder holder, final int position, @NonNull Event model) {
+            protected void onBindViewHolder(@NonNull final EventFragment.EventViewHolder holder, final int position, @NonNull final Event model) {
 
-                holder.title.setText(model.getTitle());
-                holder.date.setText(model.getDate());
-                holder.location.setText(model.getLocation());
-                Picasso.get().load(model.getImage()).placeholder(R.drawable.banner).into(holder.image);
-
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                ref.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if ((dataSnapshot.hasChild("Favorite"))) {
 
-                        String eventId = getRef(position).getKey();
+                            TextView text = (TextView) view.findViewById(R.id.hm_title2_sub);
+                            text.setText("Events that you liked");
+                            holder.title.setText(model.getTitle());
+                            holder.date.setText(model.getDate());
+                            holder.location.setText(model.getLocation());
+                            Picasso.get().load(model.getImage()).placeholder(R.drawable.banner).into(holder.image);
 
-                        Intent eventDetailIntent = new Intent(getActivity(), EventDetailActivity.class);
-                        eventDetailIntent.putExtra("eventId", eventId);
-                        startActivity(eventDetailIntent);
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    String eventId = getRef(position).getKey();
+
+                                    Intent eventDetailIntent = new Intent(getActivity(), EventDetailActivity.class);
+                                    eventDetailIntent.putExtra("eventId", eventId);
+                                    startActivity(eventDetailIntent);
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
 
             }
-
             @NonNull
             @Override
             public EventFragment.EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -143,6 +164,8 @@ public class HomeFragment extends Fragment {
                 return viewHolder;
             }
         };
+
+
         mRecyclerView2.setAdapter(adapter2);
         adapter2.startListening();
     }

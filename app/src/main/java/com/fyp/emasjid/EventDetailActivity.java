@@ -127,7 +127,7 @@ public class EventDetailActivity extends AppCompatActivity implements Observable
             }
         });
 
-        final LinearLayout overflowButton = (LinearLayout) this.findViewById(R.id.ed_overflowMenu);
+        final ImageView overflowButton = (ImageView) this.findViewById(R.id.ed_overflowMenu);
 
         overflowButton.setOnClickListener(new View.OnClickListener() {
             @Override

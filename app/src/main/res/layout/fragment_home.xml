@@ -81,7 +81,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:textSize="16sp"
-                android:text="Events that you liked"/>
+                android:text="No event added yet"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hrecyclerView2"

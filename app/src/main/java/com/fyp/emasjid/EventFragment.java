@@ -95,13 +95,13 @@ public class EventFragment extends Fragment {
                     Boolean isFav = true;
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(fEventId)){
+                        if (dataSnapshot.hasChild(fEventId)){
                             holder.favicon.setBackgroundResource(R.drawable.ic_star_black_24dp);
                             holder.favicon.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     holder.favicon.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
-                                    Toast.makeText(getActivity(),"fav clicked", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(),"Event removed from favorite", Toast.LENGTH_SHORT).show();
                                     fRef.child(fEventId).removeValue();
                                 }
                             });
@@ -113,7 +113,7 @@ public class EventFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     holder.favicon.setBackgroundResource(R.drawable.ic_star_black_24dp);
-                                    Toast.makeText(getActivity(),"fav clicked", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(),"Event added to favorite", Toast.LENGTH_SHORT).show();
                                     addtoFavorite(mRef,fRef,fEventId);
                                     //isFav = !isFav;
                                 }
