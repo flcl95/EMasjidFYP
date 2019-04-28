@@ -18,8 +18,11 @@ import org.json.JSONObject;
 public class AdzanActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getName();
-
-    private TextView data;
+    private TextView subh;
+    private TextView zuhr;
+    private TextView asr;
+    private TextView maghr;
+    private TextView isya;
 
     private RequestQueue mRequestQueue;
     private String url = "https://api.azanpro.com/times/today.json?zone=sgr01&format=12-hour";
@@ -29,7 +32,11 @@ public class AdzanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adzan);
 
-        data = findViewById(R.id.result);
+        subh = findViewById(R.id.textSubh);
+        zuhr = findViewById(R.id.textZuhr);
+        asr = findViewById(R.id.textAsr);
+        maghr = findViewById(R.id.textMaghr);
+        isya = findViewById(R.id.textIsya);
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
 
@@ -112,11 +119,11 @@ public class AdzanActivity extends AppCompatActivity {
                             String maghrib = jobj.getString("maghrib");
                             String isyak = jobj.getString("isyak");
 
-                            data.setText("Subuh: " + subuh + "\n\n" +
-                                    "Zohor: " + zohor + "\n\n" +
-                                    "Asar: " + asar + "\n\n" +
-                                    "Maghrib: " + maghrib + "\n\n" +
-                                    "Isyak: " + isyak + "\n\n" );
+                            subh.setText("Subh:     " + subuh);
+                            zuhr.setText("Zuhr:     " + zohor);
+                            asr.setText("Asr:     " + asar);
+                            maghr.setText("Maghrib:     " + maghrib);
+                            isya.setText("Isya:     " + isyak);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
