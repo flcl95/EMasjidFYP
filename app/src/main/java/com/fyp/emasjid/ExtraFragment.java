@@ -54,28 +54,5 @@ public class ExtraFragment extends Fragment {//implements ObservableScrollViewCa
 
         return view;
     }
-    /*
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        onScrollChanged(mScrollView.getCurrentScrollY(), false, false);
-    }
-
-    @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-        int baseColor = getResources().getColor(R.color.colorPrimary);
-        float alpha = Math.min(1, (float) scrollY / mParallaxImageHeight);
-        mToolbarView.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, baseColor));
-        ViewHelper.setTranslationY(mImageView, scrollY / 2);
-    }
-
-    @Override
-    public void onDownMotionEvent() {
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-    }
-    */
 }
 

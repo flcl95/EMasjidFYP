@@ -122,6 +122,7 @@ public class EventDetailActivity extends AppCompatActivity implements Observable
             @Override
             public void onClick(View v) {
                 Intent contactIntent = new Intent(EventDetailActivity.this, ContactOrganizerActivity.class);
+                contactIntent.putExtra("eventId",eventId);
                 startActivity(contactIntent);
             }
         });
