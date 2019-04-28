@@ -64,6 +64,12 @@ public class RegisterActivity extends AppCompatActivity {
                 Matcher validEmailMatcher = validEmailPattern.matcher(uEmail.getText().toString());
                 boolean validEmailIsMatced = validEmailMatcher.matches();
 
+                //regex for gender
+                String gender = "(?:m|M|male|Male|f|F|female|Female)$";
+                Pattern genderPattern = Pattern.compile(gender);
+                Matcher genderMatcher = genderPattern.matcher(uGender.getText().toString());
+                boolean genderIsMatched = genderMatcher.matches();
+
                 Boolean isValid = true;
 
                 //check name input
@@ -91,6 +97,10 @@ public class RegisterActivity extends AppCompatActivity {
                 //check gender input
                 if(uGender.getText().toString().isEmpty()){
                     lGender.setError("This field cannot be empty!");
+                    isValid = false;
+                }
+                else if(!genderIsMatched){
+                    lGender.setError("Invalid gender!");
                     isValid = false;
                 }
                 else{
