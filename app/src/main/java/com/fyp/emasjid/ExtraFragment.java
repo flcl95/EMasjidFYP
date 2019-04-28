@@ -15,10 +15,6 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 
 public class ExtraFragment extends Fragment {//implements ObservableScrollViewCallbacks {
 
-    private View mImageView;
-    private View mToolbarView;
-    private ObservableScrollView mScrollView;
-    private int mParallaxImageHeight;
     private View view;
     private CardView adzanCard, qiblaCard, quranCard;
 
