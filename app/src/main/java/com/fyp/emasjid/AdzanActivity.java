@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.android.volley.Request;
@@ -21,8 +20,6 @@ public class AdzanActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
 
     private TextView data;
-    private Button next_page;
-    private Button mp3_page;
 
     private RequestQueue mRequestQueue;
     private String url = "https://api.azanpro.com/times/today.json?zone=sgr01&format=12-hour";
