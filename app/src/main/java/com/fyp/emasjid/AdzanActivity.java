@@ -123,11 +123,11 @@ public class AdzanActivity extends AppCompatActivity {
                             String maghrib = jobj.getString("maghrib");
                             String isyak = jobj.getString("isyak");
 
-                            subh.setText("Subh:     " + subuh);
-                            zuhr.setText("Zuhr:     " + zohor);
-                            asr.setText("Asr:     " + asar);
-                            maghr.setText("Maghrib:     " + maghrib);
-                            isya.setText("Isya:     " + isyak);
+                            subh.setText("Subh: " + subuh);
+                            zuhr.setText("Zuhr: " + zohor);
+                            asr.setText("Asr: " + asar);
+                            maghr.setText("Maghrib: " + maghrib);
+                            isya.setText("Isya: " + isyak);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
